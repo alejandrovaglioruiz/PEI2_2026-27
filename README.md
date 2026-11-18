@@ -8,4 +8,4 @@ Integrantes del grupo
   - Ye, Hao
   - Tascon Morala, Hector
 
-Tema: 7, Analisis de telemetria y Ascenso de una Sonda Meteorologica Estratosferica
+**Tema**: 7, Analisis de telemetria y Ascenso de una Sonda Meteorologica Estratosferica
