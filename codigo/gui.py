@@ -36,7 +36,7 @@ def display_2(m, n, v, lnP, ej):   #float, float, vector, vector
 
     ej.set_xlabel("Voltage")
     ej.set_ylabel("ln(Presion)")
-    ej.set_title("Recta de ajuste Voltage frente Ln de Presion")
+    ej.set_title("Recta de ajuste Voltage frente Ln(Presion)")
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print("hello world!")
