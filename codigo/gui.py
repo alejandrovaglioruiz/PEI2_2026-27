@@ -23,6 +23,9 @@ def display_1(v): #vector
     ax.set_ylim(0, v[1] * margin)
     ax.set_zlim(0, v[2] * margin)
 
+def display_2(m, n, v, lnP):    #float, float
+    plt.scatter(v, lnP, color="green")
+    plt.scatter([v[0], v[-1]],[((v[0]*m) + n), ((v[-1]*m)+n) ], color="green")
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print("hello world!")
