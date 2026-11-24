@@ -4,12 +4,13 @@ def display_results():
     plt.show()
 
 def crea_ejes():
-    fig = plt.figure(figsize=(14, 7))
+    fig = plt.figure(figsize=(18, 7))
 
-    ej1 = fig.add_subplot(121, projection='3d')
-    ej2 = fig.add_subplot(122)  
+    ej1 = fig.add_subplot(131, projection='3d')
+    ej2 = fig.add_subplot(132)
+    ej3 = fig.add_subplot(133)
     
-    return ej1, ej2 
+    return ej1, ej2, ej3
 
 def display_1(v, ej): #vector
 
@@ -37,6 +38,14 @@ def display_2(m, n, v, lnP, ej):   #float, float, vector, vector
     ej.set_xlabel("Voltage")
     ej.set_ylabel("ln(Presion)")
     ej.set_title("Recta de ajuste Voltage frente Ln(Presion)")
+
+def display_3(h_reg, t_reg, t_telemetria, altitud_cruda, ej):
+    ej.scatter(t_telemetria, altitud_cruda, color="blue")
+    ej.plot(t_reg, h_reg, color="blue")
+
+    ej.set_xlabel("Tiempo")
+    ej.set_ylabel("Altitud")
+    ej.set_title("Altitud frente Tiempo Interpolada")
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print("hello world!")

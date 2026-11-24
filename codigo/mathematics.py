@@ -1,8 +1,7 @@
-from numpy import array, vstack, delete, append, mean
+from numpy import array, vstack, delete, append, mean, where
 
 def my_dot (A, X):        #vector, vector
     return sum(A[i]*X[i] for i in range (len(A)))
-
 
 def solve_system(A, b):   #matrix, vector
     B = A.astype(float).copy()  #esto se hace para evitar que la funcion modifique la variable global
@@ -36,13 +35,37 @@ def solve_system(A, b):   #matrix, vector
 
     return solution
 
-def minim_cuad(v, u):
+def minim_cuad(v, u):   #vector, vector
 
     m = ((len(v)*(my_dot(v, u)))-(sum(v)*sum(u)))/(((len(v))*(my_dot(v,v)))-(sum(v)**2))
 
     n = mean(u) - m*mean(v)
 
     return m, n
+
+def find_lw_bound(value, vector):   #float/int , vector
+    for i in vector[::-1]:
+        if i < value:
+            return i
+
+def find_up_bound(value, vector):   #float/int , vector
+    for i in vector:
+        if i >= value:
+            return i
+
+def interpolate(t_reg, t_crud, a_crud): #vector, vector, vector
+    h_reg = []
+
+    for t in t_reg:
+        if t == t_crud[0]:              #esto es necesario para que no haya un error al calcular las bandas inferiores y superiores
+            up = find_up_bound(t+0.00000000001, t_crud)
+            lw = find_lw_bound(t+0.00000000001, t_crud)
+        else:
+            up = find_up_bound(t, t_crud)
+            lw = find_lw_bound(t, t_crud)
+        h_reg.append(a_crud[where(t_crud==lw)]+((t-lw)/(up-lw))*(a_crud[where(t_crud==up)]-a_crud[where(t_crud==lw)]))
+
+    return array(h_reg)
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print(solve_system(array([[1,2,3],
