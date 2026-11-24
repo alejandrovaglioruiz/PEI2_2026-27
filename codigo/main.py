@@ -3,9 +3,9 @@
 # Analisis de telemetria y Ascenso de una Sonda Meteorologica Estratosferica
 #*********************************************************************************
 
-import codigo.physics as physics
-import codigo.gui as gui
-import codigo.mathematics as mathematics
+import physics
+import gui
+import mathematics
 
 
 

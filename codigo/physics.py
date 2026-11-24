@@ -1,7 +1,7 @@
 from numpy import array
 import numpy as np
-import codigo.mathematics as mathematics
-import codigo.gui as gui
+import mathematics
+import gui
 
 # 1. Matriz de calibracion del anemometro 3D (Voltajes) 
 # y vector de velocidades de viento de referencia (m/s)
