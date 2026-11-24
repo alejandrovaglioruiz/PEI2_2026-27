@@ -43,12 +43,12 @@ def minim_cuad(v, u):   #vector, vector
 
     return m, n
 
-def find_lw_bound(value, vector):   #float/int , vector
+def find_lw_bound(value, vector):   #float, vector
     for i in vector[::-1]:
         if i < value:
             return i
 
-def find_up_bound(value, vector):   #float/int , vector
+def find_up_bound(value, vector):   #float, vector
     for i in vector:
         if i >= value:
             return i
@@ -67,6 +67,43 @@ def interpolate(t_reg, t_crud, a_crud): #vector, vector, vector
 
     return array(h_reg)
 
+def binary_search(range, f, target):        #vector, float, float
+    lw_bnd = range[0]
+    up_bnd = range[-1]
+    mid = (lw_bnd+up_bnd)/2
+    iteration_index = [1]
+    iteration_value = [mid]
+    buffer = mid - 1
+
+    while True:
+        if buffer == mid:                                       #La estructura de IFs esta hecha para que el algoritmo funcione con funciones de pendiente negativa al igual que positiva
+            return mid, iteration_index, iteration_value
+        elif f(mid) < target and f(mid) < f(mid + 1):
+            lw_bnd = mid
+            buffer = mid
+            mid = (lw_bnd+up_bnd)/2
+            iteration_index.append(iteration_index[-1]+1)
+            iteration_value.append(mid) 
+        elif f(mid) > target and f(mid) < f(mid + 1):
+            up_bnd = mid
+            buffer = mid
+            mid = (lw_bnd+up_bnd)/2 
+            iteration_index.append(iteration_index[-1]+1)
+            iteration_value.append(mid)
+        elif f(mid) < target and f(mid) > f(mid + 1):
+            up_bnd = mid
+            buffer = mid
+            mid = (lw_bnd+up_bnd)/2 
+            iteration_index.append(iteration_index[-1]+1)
+            iteration_value.append(mid)
+        elif f(mid) > target and f(mid) > f(mid + 1):
+            lw_bnd = mid
+            buffer = mid
+            mid = (lw_bnd+up_bnd)/2 
+            iteration_index.append(iteration_index[-1]+1)
+            iteration_value.append(mid)
+            
+        
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print(solve_system(array([[1,2,3],
                               [4,5,6],

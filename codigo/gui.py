@@ -9,10 +9,11 @@ def crea_ejes():
     ej1 = fig.add_subplot(231, projection='3d')
     ej2 = fig.add_subplot(232)
     ej3 = fig.add_subplot(233)
+    ej4 = fig.add_subplot(234)
 
-    fig.subplots_adjust(wspace=0.5, hspace = 0.5, left = 0.08)
+    fig.subplots_adjust(wspace=0.25, hspace = 0.38, left = 0.054, right = 0.97, top = 0.93, bottom = 0.084)
     
-    return ej1, ej2, ej3
+    return ej1, ej2, ej3, ej4
 
 def display_1(v, ej): #vector
 
@@ -48,6 +49,13 @@ def display_3(h_reg, t_reg, t_telemetria, altitud_cruda, ej):
     ej.set_xlabel("Tiempo")
     ej.set_ylabel("Altitud")
     ej.set_title("Altitud frente Tiempo Interpolada")
+
+def display_4(value, iteration_index, iteration_value, ej):
+    ej.plot(iteration_index, iteration_value, color="purple")
+
+    ej.set_xlabel("Indice de iteracion")
+    ej.set_ylabel("Valor de la iteracion (tiempo)")
+    ej.set_title(f"Conv. de T(t) a -10 grados \n Resultado de la convergencia = {value:.2f} s")
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print("hello world!")

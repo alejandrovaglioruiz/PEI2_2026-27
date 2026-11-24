@@ -22,11 +22,11 @@ altitud_cruda = np.array([500, 650, 820, 1050, 1280, 1500, 1790, 2100, 2350, 280
 # 6. Datos de consumo de potencia del calefactor de a bordo (W) en el tiempo
 # (Se calculara a partir de los tiempos interpolados en el apartado 3)
 
-def solve(ej1, ej2, ej3):
+def solve(ej1, ej2, ej3, ej4):
     solve_1(ej1)
     solve_2(ej2)
     solve_3(ej3)
-    solve_4()
+    solve_4(ej4)
     solve_5()
     solve_6()
 
@@ -41,8 +41,11 @@ def solve_3(ej3):
     t_reg = [(t_telemetria[-1]/199)*i for i in range(0, 200)]   #se necesitan 199 intervalos para tener 200 tiempos
     gui.display_3(mathematics.interpolate(t_reg, t_telemetria, altitud_cruda), t_reg, t_telemetria, altitud_cruda, ej3)
 
-def solve_4():
-    print("hello world!")
+def solve_4(ej4):
+    def T (t):
+        return 25 - (0.05*t) - (0.001*(t**2)) - (0.00002*(t**3))
+    value, iteration_index, iteration_value = mathematics.binary_search(t_telemetria, T, 0)
+    gui.display_4(value, iteration_index, iteration_value, ej4)
 
 def solve_5():
     print("hello world!")
