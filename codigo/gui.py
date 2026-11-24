@@ -4,11 +4,13 @@ def display_results():
     plt.show()
 
 def crea_ejes():
-    fig = plt.figure(figsize=(18, 7))
+    fig = plt.figure(figsize=(15, 7))
 
-    ej1 = fig.add_subplot(131, projection='3d')
-    ej2 = fig.add_subplot(132)
-    ej3 = fig.add_subplot(133)
+    ej1 = fig.add_subplot(231, projection='3d')
+    ej2 = fig.add_subplot(232)
+    ej3 = fig.add_subplot(233)
+
+    fig.subplots_adjust(wspace=0.5, hspace = 0.5, left = 0.08)
     
     return ej1, ej2, ej3
 
