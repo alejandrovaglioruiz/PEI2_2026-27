@@ -1,4 +1,4 @@
-from numpy import array, vstack, delete, append
+from numpy import array, vstack, delete, append, mean
 
 def my_dot (A, X):        #vector, vector
     return sum(A[i]*X[i] for i in range (len(A)))
@@ -35,6 +35,14 @@ def solve_system(A, b):   #matrix, vector
         solution[f] = v[f]/B[f,f]
 
     return solution
+
+def minim_cuad(v, u):
+
+    m = ((len(v)*(my_dot(v, u)))-(sum(v)*sum(u)))/(((len(v))*(my_dot(v,v)))-(sum(v)**2))
+
+    n = mean(u) - m*mean(v)
+
+    return m, n
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print(solve_system(array([[1,2,3],

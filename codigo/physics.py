@@ -22,19 +22,20 @@ altitud_cruda = np.array([500, 650, 820, 1050, 1280, 1500, 1790, 2100, 2350, 280
 # 6. Datos de consumo de potencia del calefactor de a bordo (W) en el tiempo
 # (Se calculara a partir de los tiempos interpolados en el apartado 3)
 
-def solve():
-    solve_1()
-    solve_2()
+def solve(ej1, ej2):
+    solve_1(ej1)
+    solve_2(ej2)
     solve_3()
     solve_4()
     solve_5()
     solve_6()
 
-def solve_1():
-    gui.display_1(mathematics.solve_system(voltajes_anemometro, viento_referencia))
+def solve_1(ej1):
+    gui.display_1(mathematics.solve_system(voltajes_anemometro, viento_referencia), ej1)
 
-def solve_2():
-    print("hello world!")
+def solve_2(ej2):
+    m, n = mathematics.minim_cuad(v_sensor, ln_presion)
+    gui.display_2(m, n, v_sensor, ln_presion, ej2)
 
 def solve_3():
     print("hello world!")
