@@ -5,9 +5,6 @@
 
 import physics
 import gui
-import mathematics
-
-
 
 def main():
     physics.solve()

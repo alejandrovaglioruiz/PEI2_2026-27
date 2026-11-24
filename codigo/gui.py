@@ -15,7 +15,7 @@ def display_1(v): #vector
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
 
-    ax.set_title(f'Vector Resultante de Viento\nR = ({v[0]:.2f}, {v[1]:.2f}, {v[2]:.2f})')
+    ax.set_title(f'Vector Resultante de Viento\nV = ({v[0]:.2f}, {v[1]:.2f}, {v[2]:.2f})')
 
     margin = 1.2
 
