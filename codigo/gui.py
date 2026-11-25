@@ -297,20 +297,20 @@ def display_6(energia, tiempo, ejg, ejs, ejt):
 
     ejg.set_xlabel("Tiempo (segundos)")
     ejg.set_ylabel("Energia (Julios)")
-    ejg.set_title("Energia frente el Tiempo")
+    ejg.set_title(f"Energia total consumida = {sum(energia)-energia[-1]:.2f} Julios")
 
     ejs.plot(tiempo, energia, color="brown")
     ejs.plot(tiempo[0:200:5], energia[0:200:5], marker = ".", markerfacecolor = "brown", markeredgecolor = "black", linestyle = "none")
 
     ejs.set_xlabel("Tiempo (segundos)")
     ejs.set_ylabel("Energia (Julios)")
-    ejs.set_title("Energia frente el Tiempo")
+    ejs.set_title(f"Energia total consumida = {sum(energia)-energia[-1]:.2f} Julios")
 
     datos = [[t, h] for t, h in zip([mathematics.round_22(x) for x in tiempo][0:200:5], [mathematics.round_22(x) for x in energia][0:200:5])]
 
     tabla = ejt.table(
         cellText=datos,
-        colLabels=["Tiempo", "Velocidad"],
+        colLabels=["Tiempo", "Energia"],
         loc="center"
     )
 

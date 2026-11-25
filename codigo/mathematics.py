@@ -3,13 +3,13 @@ from numpy import array, vstack, delete, append, mean, where, zeros
 def my_dot (A, X):        #vector, vector
     return sum(A[i]*X[i] for i in range (len(A)))
 
-def matrix_dot (A, B):          #matrix, matrix
+def my_matrix_dot (A, B):          #matrix, matrix
     return array([[my_dot(A[i, :],B[:, j]) for j in range (len(B[0]))] for i in range (len(A))])
 
-def matrix_array_dot (A, B):    #matrix, vector
+def my_matrix_array_dot (A, B):    #matrix, vector
     return array([my_dot(A[i,:],B) for i in range (len(A))])
 
-def transpose(A):
+def my_transpose(A):
     return array([list(row) for row in zip(*A)])
 
 def solve_system(A, b):   #matrix, vector
@@ -62,7 +62,6 @@ def find_up_bound(value, vector):   #float, vector
         if i >= value:
             return i
 
-#***********************************************************************************************************************************************
 def interpolate(t_reg, t_crud, a_crud): #vector, vector, vector
     h_reg = []
     A = zeros((len(t_crud), 3))
@@ -70,16 +69,13 @@ def interpolate(t_reg, t_crud, a_crud): #vector, vector, vector
     for x in range(len(t_crud)):
         A[x,:] = [1, t_crud[x], t_crud[x]**2]
 
-    At = transpose(A)
-    poly_coef = solve_system(matrix_dot(At, A), matrix_array_dot(At, a_crud))
+    At = my_transpose(A)
+    poly_coef = solve_system(my_matrix_dot(At, A), my_matrix_array_dot(At, a_crud))
 
     for t in range(len(t_reg)):
         h_reg.append(poly_coef[0] + (poly_coef[1]*t_reg[t]) + (poly_coef[2]*(t_reg[t]**2)))
 
     return h_reg, poly_coef
-
-
-#***********************************************************************************************************************************************
 
 def binary_search(range, f, target):        #vector, float, float
     lw_bnd = range[0]
@@ -116,6 +112,8 @@ def binary_search(range, f, target):        #vector, float, float
             mid = (lw_bnd+up_bnd)/2 
             iteration_index.append(iteration_index[-1]+1)
             iteration_value.append(mid)
+        elif f(mid) == target:
+            buffer = mid
 
 def interpolate_velocidad(t_reg, h_reg): #vector, vector, vector
     velocidad = []
@@ -130,7 +128,7 @@ def interpolate_velocidad(t_reg, h_reg): #vector, vector, vector
         else:
             up = t + 1
             lw = t - 1
-        velocidad.append((h_reg[up]-h_reg[lw])/(2*(t_reg[up]-t_reg[lw])))
+        velocidad.append((h_reg[up]-h_reg[lw])/((t_reg[up]-t_reg[lw])))
 
     return array(velocidad)      
 
@@ -151,8 +149,8 @@ def calc_energy(tiempo, velocidad):     #vector, vector
 
     return(energias)
 
-def round_22 (x): #float
-    return (int(x*100))/100
+def round_22(x):  # float
+    return round(x, 2)
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print(solve_system(array([[1,2,3],
