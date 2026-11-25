@@ -152,7 +152,7 @@ def calc_energy(tiempo, velocidad):     #vector, vector
 def round_22(x):  # float
     return round(x, 2)
 
-if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
+if __name__ == "__main__":
     print(solve_system(array([[1,2,3],
                               [4,5,6],
                               [7,8,10]]), 

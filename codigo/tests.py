@@ -106,5 +106,5 @@ def run_test():
         print("round_22              test failed")
 
 
-if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
+if __name__ == "__main__":
     run_test()

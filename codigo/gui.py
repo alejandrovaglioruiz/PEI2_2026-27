@@ -321,5 +321,5 @@ def display_6(energia, tiempo, ejg, ejs, ejt):
         tabla[(x, 0)].set_height(0.03)
         tabla[(x, 1)].set_height(0.03)
 
-if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
+if __name__ == "__main__":
     print("hello world!")

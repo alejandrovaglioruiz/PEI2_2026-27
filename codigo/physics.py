@@ -82,5 +82,5 @@ def solve_6(ej6g, ej6s, ej6t):
     gui.display_6(mathematics.calc_energy(get_t(), get_v()), get_t(), ej6g, ej6s, ej6t)
 
 
-if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
+if __name__ == "__main__":
     print("hello world!")
