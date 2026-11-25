@@ -1,4 +1,3 @@
-from numpy import array
 import numpy as np
 import mathematics
 import gui
@@ -26,7 +25,7 @@ h_ref = []
 t_ref = []
 v_ref = []
 
-def set_t(list):            # Para no calcular varias veces las listas h_ref y t_ref y asi mejorar la
+def set_t(list):            # Para no calcular varias veces las listas h_ref, t_ref y v_ref y asi mejorar la
     global t_ref            # eficiencia de usan variables globales y funciones para guardarlas y usarlas
     t_ref = list
 
@@ -47,39 +46,40 @@ def get_h():
 def get_v():
     return v_ref
 
-def solve(ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, temp):
+def solve(ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, temp, ej2t, ej3t, ej4t, ej5t, ej6t):
     solve_1(ej1g, ej1s)
-    solve_2(ej2g, ej2s)
-    solve_3(ej3g, ej3s)
-    solve_4(ej4g, ej4s, temp)
-    solve_5(ej5g, ej5s)
-    solve_6(ej6g, ej6s)
+    solve_2(ej2g, ej2s, ej2t)
+    solve_3(ej3g, ej3s, ej3t)
+    solve_4(ej4g, ej4s, temp, ej4t)
+    solve_5(ej5g, ej5s, ej5t)
+    solve_6(ej6g, ej6s, ej6t)
 
 def solve_1(ej1g, ej1s):
     gui.display_1(mathematics.solve_system(voltajes_anemometro, viento_referencia), ej1g, ej1s)
 
-def solve_2(ej2g, ej2s):
+def solve_2(ej2g, ej2s, ej2t):
     m, n = mathematics.minim_cuad(v_sensor, ln_presion)
-    gui.display_2(m, n, v_sensor, ln_presion, ej2g, ej2s)
+    gui.display_2(m, n, v_sensor, ln_presion, ej2g, ej2s, ej2t)
 
-def solve_3(ej3g, ej3s):
+def solve_3(ej3g, ej3s, ej3t):
     set_t([(t_telemetria[-1]/199)*i for i in range(0, 200)])   #se necesitan 199 intervalos para tener 200 tiempos
-    set_h(mathematics.interpolate(get_t(), t_telemetria, altitud_cruda))
-    gui.display_3(get_h(), get_t(), t_telemetria, altitud_cruda, ej3g, ej3s)
+    h_reg, poly_coef = mathematics.interpolate(get_t(), t_telemetria, altitud_cruda)
+    set_h(h_reg)
+    gui.display_3(get_h(), get_t(), t_telemetria, altitud_cruda, ej3g, ej3s, ej3t, poly_coef)
 
-def solve_4(ej4g, ej4s, temp):
+def solve_4(ej4g, ej4s, temp, ej4t):
     def T (t):
         return 15 - (0.05*t) - (0.001*(t**2)) - (0.00002*(t**3)) - temp
     value, iteration_index, iteration_value = mathematics.binary_search(t_telemetria, T, 0)
-    gui.display_4(value, iteration_index, iteration_value, ej4g, ej4s, temp)
+    gui.display_4(value, iteration_index, iteration_value, ej4g, ej4s, temp, ej4t)
 
-def solve_5(ej5g, ej5s):
+def solve_5(ej5g, ej5s, ej5t):
     set_v(mathematics.interpolate_velocidad(get_t(), get_h()))
-    gui.display_5(get_t(), get_v(), ej5g, ej5s)
+    gui.display_5(get_t(), get_v(), ej5g, ej5s, ej5t)
     
 
-def solve_6(ej6g, ej6s):
-    gui.display_6(mathematics.calc_energy(get_t(), get_v()), get_t(), ej6g, ej6s)
+def solve_6(ej6g, ej6s, ej6t):
+    gui.display_6(mathematics.calc_energy(get_t(), get_v()), get_t(), ej6g, ej6s, ej6t)
 
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py

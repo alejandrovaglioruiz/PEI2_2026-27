@@ -7,8 +7,8 @@ import physics
 import gui
 
 def main():
-    ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, radio, slider = gui.crea_ejes()
-    physics.solve(ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, -10)
+    ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, radio, slider, ej2t, ej3t, ej4t, ej5t, ej6t = gui.crea_ejes()
+    physics.solve(ej1g, ej2g, ej3g, ej4g, ej5g, ej6g, ej1s, ej2s, ej3s, ej4s, ej5s, ej6s, -10, ej2t, ej3t, ej4t, ej5t, ej6t)
     gui.display_results(radio, slider)
 
 

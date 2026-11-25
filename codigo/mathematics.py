@@ -76,7 +76,7 @@ def interpolate(t_reg, t_crud, a_crud): #vector, vector, vector
     for t in range(len(t_reg)):
         h_reg.append(poly_coef[0] + (poly_coef[1]*t_reg[t]) + (poly_coef[2]*(t_reg[t]**2)))
 
-    return h_reg
+    return h_reg, poly_coef
 
 
 #***********************************************************************************************************************************************
@@ -150,6 +150,9 @@ def calc_energy(tiempo, velocidad):     #vector, vector
         energias.append(energia)
 
     return(energias)
+
+def round_22 (x): #float
+    return (int(x*100))/100
 
 if __name__ == "__main__":    #esta declaracion se usa para probar logica dentro de mathematics.py
     print(solve_system(array([[1,2,3],
